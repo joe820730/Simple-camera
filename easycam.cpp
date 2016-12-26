@@ -10,8 +10,20 @@ int main()
 {
   VideoCapture cam0(0);
   Mat image0;
-  int i=0;
+  int i=-1;
+  FILE *cfgFP;
   char filename[64];
+  char cfgfile[64];
+  cfgFP=fopen("camcfg.ini","r");
+  if(cfgFP != NULL)
+  {
+      fscanf(cfgFP,"%d",&i);
+      fclose(cfgFP);
+  }
+  else
+  {
+      printf("No config file, use default setting.\n");
+  }
     if(!cam0.isOpened())
     {
       printf("No camera!\n");
@@ -28,18 +40,21 @@ int main()
       {
           case 'c':
           {
+            i++;
             sprintf(filename,"IMG_%03d.jpg",i);
             vector<int> quality;
             quality.push_back(CV_IMWRITE_JPEG_QUALITY);
             quality.push_back(100);
             imwrite(filename,image0,quality);
-            i++;
             cout << "Image " << i <<" saved!" <<endl;
             break;
           }
           case 27:
           {
               cout << "Program Exit!" <<endl;
+              cfgFP=fopen("camcfg.ini","w");
+              fprintf(cfgFP,"%d",i);
+              fclose(cfgFP);
               return 0;
           }
       }
