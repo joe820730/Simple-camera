@@ -29,7 +29,10 @@ int main()
           case 'c':
           {
             sprintf(filename,"IMG_%03d.jpg",i);
-            imwrite(filename,image0);
+            vector<int> quality;
+            quality.push_back(CV_IMWRITE_JPEG_QUALITY);
+            quality.push_back(100);
+            imwrite(filename,image0,quality);
             i++;
             cout << "Image " << i <<" saved!" <<endl;
             break;
