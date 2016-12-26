@@ -1,0 +1,6 @@
+*.exe
+*.jpg
+*.obj
+*.o
+bin/
+obj/
