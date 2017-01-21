@@ -1,5 +1,5 @@
 OBJDIR = ./obj
-OBJECTS = easycam.o
+OBJECTS = easycam.cpp
 OBJ := $(foreach obj, $(OBJECTS), $(OBJDIR)/$(obj))
 
 CC = g++
@@ -12,10 +12,13 @@ vpath %.cpp ./
 
 all: create_folders $(TARGET)
 
-$(TARGET): $(OBJ)
-	$(CC) -o $@ $(OBJ) $(FLAGS) 
+#$(TARGET): $(OBJ)
+#	$(CC) -o $@ $(OBJ) $(FLAGS) 
+#
+#$(OBJDIR)/%.o: %.cpp
+#	$(CC) -o $@ $^ $(FLAGS) $(LIBS)
 
-$(OBJDIR)/%.o: %.cpp
+$(TARGET): easycam.cpp
 	$(CC) -o $@ $^ $(FLAGS) $(LIBS)
 
 create_folders:
