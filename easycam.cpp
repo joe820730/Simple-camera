@@ -32,11 +32,13 @@ int main()
     cam0.set(CV_CAP_PROP_FRAME_WIDTH,640);
     cam0.set(CV_CAP_PROP_FRAME_HEIGHT,480);
 
+    char k;
     while(1)
     {
       cam0.read(image0);
       imshow("Webcam",image0);
-      switch (waitKey(1))
+      k = waitKey(1);
+      switch (k)
       {
           case 'c':
           {
