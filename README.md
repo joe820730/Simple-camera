@@ -30,3 +30,6 @@ sudo ldconfig
 ```
 
 Finally, clone this project and checkout to this branch, and build it.
+
+### DEMO
+![Demo](http://140.127.205.188/m1045113/Easy_camera/raw/using_raspicam/IMG_002.jpg)
