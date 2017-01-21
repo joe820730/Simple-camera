@@ -11,12 +11,14 @@ using namespace std;
 
 int main()
 {
-  raspicam::RaspiCam_Cv PICam;
-//  VideoCapture cam0(0);
-  Mat image0;
+  raspicam::RaspiCam_Cv PICam;  //PI camera object.
+//  VideoCapture cam0(0); //OpenCV with USB Camera init.
+  Mat image0;  //OpenCV Mat space.
+  /* PI camera setting */  //same as OpenCV
   PICam.set(CV_CAP_PROP_FORMAT, CV_8UC3);
   PICam.set(CV_CAP_PROP_FRAME_WIDTH, IMG_W);
   PICam.set(CV_CAP_PROP_FRAME_HEIGHT, IMG_H);
+
   int i=-1;
   FILE *cfgFP;
   char filename[64];
@@ -37,13 +39,20 @@ int main()
     return -1;
   }
 
-  char k;
+  char k; // keyboard char
   while(1)
   {
-    //      cam0.read(image0);
-    PICam.grab();
-    PICam.retrieve(image0);
-    imshow("Webcam",image0);
+    /*
+     * In OpenCV with USB camera, we just need a line:
+     * cam0.read(image0);
+     * to read image from camera to cam0;
+     *
+     * But in RaspiCam, we need grad image,
+     * and move image to cv::Mat space.
+     */
+    PICam.grab();   //grad image from PIcam
+    PICam.retrieve(image0);  //move image to CV Mat space.
+    imshow("Webcam",image0); //show image to a window.
     k = waitKey(1);
     switch (k)
     {
@@ -68,5 +77,5 @@ int main()
         }
     }
   }
-  PICam.release();
+  PICam.release();  //Release camera.
 }
