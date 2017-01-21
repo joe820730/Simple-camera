@@ -3,7 +3,9 @@ Usage:
 + Press 'ESC' to exit program.
 
 This branch is using with Raspberry PI CSI(Camera Serial Interface).
-You can't use it with normal device.
+
+**You can't use it with normal device.**
+
 
 This sample requires OpenCV and RaspiCam.
 
@@ -14,11 +16,12 @@ sudo apt-get install libopencv-dev
 ```
 or download from official website and build it yourself.
 
+
 Then we need RaspiCam, clone it first:
 ```shell
 git clone https://github.com/cedricve/raspicam.git
 ```
-and build it: (more detail please visit original author's page)
+and build it: (more detail please visit original author's [Github page](https://github.com/cedricve/raspicam.git))
 ```shell
 cd raspicam
 mkdir build
