@@ -2,14 +2,17 @@
 #include <iostream>
 #include <stdlib.h>
 #include <opencv2/opencv.hpp>
+#include <raspicam/raspicam_cv.h>
 
 using namespace cv;
 using namespace std;
 
 int main()
 {
-  VideoCapture cam0(0);
+  raspicam::RaspiCam_Cv PICam;
+//  VideoCapture cam0(0);
   Mat image0;
+  PICam.set(CV_CAP_PROP_FORMAT, CV_8UC1);
   int i=-1;
   FILE *cfgFP;
   char filename[64];
@@ -24,17 +27,19 @@ int main()
   {
       printf("No config file, use default setting.\n");
   }
-    if(!cam0.isOpened())
+    if(!PICam.open())
     {
       printf("No camera!\n");
       return -1;
     }
-    cam0.set(CV_CAP_PROP_FRAME_WIDTH,640);
-    cam0.set(CV_CAP_PROP_FRAME_HEIGHT,480);
+//    cam0.set(CV_CAP_PROP_FRAME_WIDTH,640);
+//    cam0.set(CV_CAP_PROP_FRAME_HEIGHT,480);
 
     while(1)
     {
-      cam0.read(image0);
+//      cam0.read(image0);
+      PICam.grab();
+      PICam.retrieve(image0);
       imshow("Webcam",image0);
       switch (waitKey(1))
       {
