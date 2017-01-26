@@ -3,11 +3,20 @@
 #include <stdlib.h>
 #include <opencv2/opencv.hpp>
 
+#ifdef __linux
+#include <sys/time.h>
+#endif
+
 using namespace cv;
 using namespace std;
 
 int main()
 {
+#ifdef __linux
+  struct timeval t1,t2;
+  double d1,sum=0,avgFPS;
+  int x=0;
+#endif
   VideoCapture cam0(0);
   Mat image0;
   int i=-1;
@@ -35,6 +44,9 @@ int main()
     char k;
     while(1)
     {
+#ifdef __linux
+      gettimeofday(&t1,NULL);
+#endif
       cam0.read(image0);
       imshow("Webcam",image0);
       k = waitKey(1);
@@ -60,5 +72,18 @@ int main()
               return 0;
           }
       }
+#ifdef __linux
+      gettimeofday(&t2,NULL);
+      d1 = (t2.tv_sec - t1.tv_sec) + (t2.tv_usec - t1.tv_usec)/1E+6;
+      sum = sum + d1;
+      x++;
+      if(x==60)
+      {
+        avgFPS = 60.0/sum;
+        printf("Average FPS: %lf\n",avgFPS);
+        x=0;
+        sum=0;
+      }
+#endif
     }
 }
