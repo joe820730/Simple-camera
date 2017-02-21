@@ -6,6 +6,7 @@ This branch is using with Raspberry PI CSI(Camera Serial Interface).
 
 **You can't use it with normal device.**
 
+http://yehnan.blogspot.tw/2013/05/raspberry-pi.html
 
 This sample requires OpenCV and RaspiCam.
 
