@@ -2,6 +2,7 @@
 #include <iostream>
 #include <stdlib.h>
 #include <opencv2/opencv.hpp>
+#include <time.h>
 
 #ifdef __linux
 #include <sys/time.h>
@@ -14,9 +15,11 @@ int main()
 {
 #ifdef __linux
   struct timeval t1,t2;
+#else
+  clock_t t1,t2;
+#endif
   double d1,sum=0,avgFPS;
   int x=0;
-#endif
   VideoCapture cam0(0);
   Mat image0;
   int i=-1;
@@ -46,6 +49,8 @@ int main()
     {
 #ifdef __linux
       gettimeofday(&t1,NULL);
+#else
+	  t1 = clock();
 #endif
       cam0.read(image0);
       imshow("Webcam",image0);
@@ -75,6 +80,10 @@ int main()
 #ifdef __linux
       gettimeofday(&t2,NULL);
       d1 = (t2.tv_sec - t1.tv_sec) + (t2.tv_usec - t1.tv_usec)/1E+6;
+#else
+	  t2 = clock();
+	  d1 = (t2 - t1)/(double)(CLOCKS_PER_SEC);
+#endif
       sum = sum + d1;
       x++;
       if(x==60)
@@ -84,6 +93,5 @@ int main()
         x=0;
         sum=0;
       }
-#endif
     }
 }
