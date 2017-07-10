@@ -18,9 +18,9 @@ sudo apt-get install libv4l-dev
 3. Reboot
 
 4. Load v4l2 driver
-``
+```shell
 sudo modprobe bcm2835-v4l2
-``
+```
 
 5. (Optional) Auto load v4l driver when boot.
 ```shell
