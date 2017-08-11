@@ -3,7 +3,7 @@ OBJECTS = easycam.cpp
 OBJ := $(foreach obj, $(OBJECTS), $(OBJDIR)/$(obj))
 CC = g++
 FLAGS = -Wall -g -O3 -std=c++11
-LIBS = -lm -lopencv_core -lopencv_imgproc -lopencv_calib3d -lopencv_highgui 
+LIBS = -lm -lopencv_core -lopencv_imgproc -lopencv_calib3d -lopencv_highgui -lopencv_videoio -lopencv_video -lopencv_imgcodecs 
 TARGET = bin/main.exec
 vpath %.cpp ./
 all: create_folders $(TARGET)
